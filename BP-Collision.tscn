@@ -155,6 +155,10 @@ _data = {
 [node name="Node3D" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+max_contacts_reported = 3
+contact_monitor = true
 script = ExtResource("1_dtl7q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
@@ -212,7 +216,7 @@ bones/6/parent = 5
 bones/6/rest = Transform3D(-0.0863705, 0.263849, 0.960689, 0.0336689, 0.964515, -0.261872, -0.995694, 0.00972736, -0.0921892, 7.83357e-05, 0.389141, -0.0203929)
 bones/6/enabled = true
 bones/6/position = Vector3(7.83357e-05, 0.389141, -0.0203929)
-bones/6/rotation = Quaternion(-0.402281, 0.759463, -0.182231, 0.47768)
+bones/6/rotation = Quaternion(-0.210658, 0.540428, -0.483643, 0.655477)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "forearm.L"
 bones/7/parent = 6
@@ -233,7 +237,7 @@ bones/9/parent = 8
 bones/9/rest = Transform3D(-0.0863707, -0.263849, -0.960689, -0.0336689, 0.964515, -0.261872, 0.995694, 0.0097273, -0.0921894, -7.83157e-05, 0.389141, -0.0203929)
 bones/9/enabled = true
 bones/9/position = Vector3(-7.83157e-05, 0.389141, -0.0203929)
-bones/9/rotation = Quaternion(-0.168514, -0.328034, 0.514151, 0.774368)
+bones/9/rotation = Quaternion(-0.341516, -0.644987, 0.252534, 0.635283)
 bones/9/scale = Vector3(1, 1, 1)
 bones/10/name = "forearm.R"
 bones/10/parent = 9

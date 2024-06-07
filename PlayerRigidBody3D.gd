@@ -58,7 +58,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var p = planet_nodes[0]
 	
 	var norm = (p.global_transform.origin - self.global_transform.origin).normalized()
+	#### CHECKOUT: https://kidscancode.org/godot_recipes/3.x/3d/3d_align_surface/
 	self.basis.y = -norm
+	self.basis.x = -self.basis.z.cross(norm)
 	#xform.basis.y = new_y
 	#xform.basis.x = -xform.basis.z.cross(new_y)
 	#xform.basis = xform.basis.orthonormalized()

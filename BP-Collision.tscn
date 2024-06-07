@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5x17omng40gw"]
+[gd_scene load_steps=9 format=3 uid="uid://c5x17omng40gw"]
+
+[ext_resource type="Script" path="res://PlayerRigidBody3D.gd" id="1_dtl7q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rl8m6"]
 
@@ -153,6 +155,7 @@ _data = {
 [node name="Node3D" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
+script = ExtResource("1_dtl7q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 transform = Transform3D(3.67953, 0, 0, 0, 6.46603, 0, 0, 0, 1.69981, 0, 2.88446, 0)
@@ -209,7 +212,7 @@ bones/6/parent = 5
 bones/6/rest = Transform3D(-0.0863705, 0.263849, 0.960689, 0.0336689, 0.964515, -0.261872, -0.995694, 0.00972736, -0.0921892, 7.83357e-05, 0.389141, -0.0203929)
 bones/6/enabled = true
 bones/6/position = Vector3(7.83357e-05, 0.389141, -0.0203929)
-bones/6/rotation = Quaternion(-0.359291, 0.716515, -0.266695, 0.535154)
+bones/6/rotation = Quaternion(-0.317191, 0.670269, -0.338019, 0.579545)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "forearm.L"
 bones/7/parent = 6
@@ -230,7 +233,7 @@ bones/9/parent = 8
 bones/9/rest = Transform3D(-0.0863707, -0.263849, -0.960689, -0.0336689, 0.964515, -0.261872, 0.995694, 0.0097273, -0.0921894, -7.83157e-05, 0.389141, -0.0203929)
 bones/9/enabled = true
 bones/9/position = Vector3(-7.83157e-05, 0.389141, -0.0203929)
-bones/9/rotation = Quaternion(-0.218488, -0.420011, 0.455329, 0.754009)
+bones/9/rotation = Quaternion(-0.259944, -0.49609, 0.397744, 0.726721)
 bones/9/scale = Vector3(1, 1, 1)
 bones/10/name = "forearm.R"
 bones/10/parent = 9
@@ -284,3 +287,5 @@ root_node = NodePath("../RigidBody3D")
 libraries = {
 "": SubResource("AnimationLibrary_10sdd")
 }
+
+[node name="Node3D" type="Node3D" parent="."]

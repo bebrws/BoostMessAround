@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 window/size/viewport_width=2048
 window/size/viewport_height=1024
 
+[physics]
+
+3d/default_gravity=2.08165e-12
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

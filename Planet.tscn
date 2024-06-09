@@ -22,7 +22,7 @@ gravity_space_override = 3
 gravity_point = true
 gravity_point_center = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 gravity_direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-gravity = 5.486
+gravity = 14.437
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)

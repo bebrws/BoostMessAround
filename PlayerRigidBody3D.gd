@@ -24,14 +24,17 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	
-	if Input.is_action_pressed("ui_accept"):
-		apply_central_force(basis.y * delta * 1000.0)
+	if Input.is_action_pressed("ui_down"):
+		self.apply_central_force(self.basis * Vector3(-10.0, 0.0, 0.0))
+		
+	if Input.is_action_pressed("ui_up"):
+		self.apply_central_force(self.basis * Vector3(10.0, 0.0, 0.0))
 		 
 	if Input.is_action_pressed("ui_left"):
-		apply_torque(Vector3(100.0 * delta, 0.0, 0.0))
-		
+		self.apply_central_force(self.basis * Vector3(0.0, 0.0, 10.0))
+				
 	if Input.is_action_pressed("ui_right"):
-		apply_torque(Vector3(-100.0 * delta, 0.0,0.0))
+		self.apply_central_force(self.basis * Vector3(0.0, 0.0, -10.0))
 
 
 	var planet_nodes = get_tree().get_nodes_in_group("planet")

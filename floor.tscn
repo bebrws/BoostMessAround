@@ -15,7 +15,7 @@ albedo_color = Color(1, 0.12549, 1, 1)
 script = ExtResource("1_7yum2")
 
 [node name="Planet" parent="." groups=["planet"] instance=ExtResource("2_urw45")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.140521, 10.3125, -0.126157)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.140521, 21.9225, -0.126157)
 
 [node name="Player" parent="." instance=ExtResource("1_pggdt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118, 3.35783, 4.104)
@@ -35,6 +35,7 @@ use_collision = true
 material = SubResource("StandardMaterial3D_qvcap")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, -0.107999, 0.994151, 3.46747e-16, 0.994151, 0.107999, -1, 4.72079e-09, -4.34557e-08, 17.9614, 7.70807, -1.52)
+transform = Transform3D(-4.12702e-08, 0.225615, 0.974217, 1.44033e-08, 0.974217, -0.225615, -1, 4.72079e-09, -4.34557e-08, 36.9429, 7.70807, -1.52)
 
 [node name="P" parent="." instance=ExtResource("3_n5obo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.17225, 0)

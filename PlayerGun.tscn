@@ -249,11 +249,10 @@ _data = {
 [node name="Node3D" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
+mass = 1.82
 max_contacts_reported = 3
 contact_monitor = true
+angular_damp = 4.015
 script = ExtResource("1_lpuit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]

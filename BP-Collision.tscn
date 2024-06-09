@@ -155,10 +155,7 @@ _data = {
 [node name="Node3D" type="Node3D"]
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-max_contacts_reported = 3
+max_contacts_reported = 7
 contact_monitor = true
 script = ExtResource("1_dtl7q")
 

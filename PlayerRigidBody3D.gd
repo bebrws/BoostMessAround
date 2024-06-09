@@ -17,39 +17,73 @@ var _should_reset := false
 #@onready var _camera_controller = get_node(camera_path)
 @onready var _start_position := global_transform.origin
 
+var facing = TAU / 2
 
 func _ready() -> void:
 	#_model.max_ground_speed = 4.0
 	pass
+
 	
 func _process(delta: float) -> void:
-	
-	if Input.is_action_pressed("ui_down"):
-		self.apply_central_force(self.basis * Vector3(-10.0, 0.0, 0.0))
-		
-	if Input.is_action_pressed("ui_up"):
-		self.apply_central_force(self.basis * Vector3(10.0, 0.0, 0.0))
-		 
-	if Input.is_action_pressed("ui_left"):
-		self.apply_central_force(self.basis * Vector3(0.0, 0.0, 10.0))
-				
-	if Input.is_action_pressed("ui_right"):
-		self.apply_central_force(self.basis * Vector3(0.0, 0.0, -10.0))
-		
-	if Input.is_action_pressed("ui_accept"):
-		self.apply_central_force(self.basis * Vector3(0.0, 50.0, 10.0))	
-
 
 	var planet_nodes = get_tree().get_nodes_in_group("planet")
 	var p = planet_nodes[0]
+	var ppaxis: Vector3 = (p.global_transform.origin - self.global_transform.origin).normalized()
+	DebugDraw3D.draw_line(p.global_transform.origin, ppaxis, Color(0, 0, 1))
+
 	#print(p)
 	DebugDraw3D.draw_line(p.global_transform.origin, self.global_transform.origin, Color(1, 1, 0))
 	
 	var c = p.global_transform.origin.cross(self.global_transform.origin)
-	DebugDraw3D.draw_line(p.global_transform.origin, self.global_transform.origin, Color(1, 1, 0))
+	DebugDraw3D.draw_line(p.global_transform.origin, c, Color(1, 0, 0))
+	
+	
+	#var input_left_right := (
+		#Input.get_action_strength("ui_left")
+		#- Input.get_action_strength("ui_right")
+	#)
+	#print(input_left_right)
+	#facing = (TAU / 2 * input_left_right)
+	#print(facing)
+	
+		
 	#if is_on_floor(state):
 		#print("on floor")
+			#
+	#if Input.is_action_pressed("ui_down"):
+		#self.apply_central_force(self.transform.basis * Vector3(-10.0, 0.0, 0.0))
+		##
+	#if Input.is_action_pressed("ui_up"):
+		#self.apply_central_force(self.transform.basis * Vector3(10.0, 0.0, 0.0))
+##
+	#if Input.is_action_pressed("ui_left"):
+		#facing = TAU / 8
+		##self.apply_central_force(self.basis * Vector3(0.0, 0.0, 10.0))
+				##
+	#if Input.is_action_pressed("ui_right"):
+		#facing = -TAU / 8
+		#self.apply_central_force(self.basis * Vector3(0.0, 0.0, -10.0))
+		#
+	#if Input.is_action_pressed("ui_accept"):
+		#self.apply_central_force(self.basis * Vector3(0.0, 50.0, 10.0))	
 	
+		
+func _get_model_oriented_input() -> Vector3:
+	var input_left_right := (
+		Input.get_action_strength("ui_left")
+		- Input.get_action_strength("ui_right")
+	)
+	var input_forward := Input.get_action_strength("ui_up")
+
+	var raw_input = Vector3(input_left_right, 0.0, input_forward)
+
+	var input := Vector3.ZERO
+	# This ensures correct analogue input strength in any direction with a joypad stick
+	input.x = raw_input.x * sqrt(1.0 - raw_input.y * raw_input.y / 2.0)
+	input.y = raw_input.y * sqrt(1.0 - raw_input.x * raw_input.x / 2.0)
+
+	input = self.transform.basis * input
+	return input	
 	
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	# This clause handles if a player falls off a planet, resetting 
@@ -60,13 +94,69 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 	local_gravity = state.total_gravity.normalized()
 	
+	
+	if Input.is_action_pressed("ui_up"):
+		self.apply_central_force(self.transform.basis * Vector3(0.0, 0.0, -10.0))
+		#
+	if Input.is_action_pressed("ui_down"):
+		self.apply_central_force(self.transform.basis * Vector3(0.0, 0.0, 10.0))
+#
+	if Input.is_action_pressed("ui_left"):
+		facing = TAU / 32
+		#self.apply_central_force(self.basis * Vector3(0.0, 0.0, 10.0))
+				#
+	if Input.is_action_pressed("ui_right"):
+		facing = -TAU / 32	
+	
 	var planet_nodes = get_tree().get_nodes_in_group("planet")
 	var p = planet_nodes[0]
+	var ppaxis: Vector3 = (p.global_transform.origin - self.global_transform.origin).normalized()
+	#if Input.is_action_pressed("ui_down"):
+		#facing = facing + (Vector3.LEFT * 0.1)
+	#if Input.is_action_pressed("ui_up"):
+		#facing = facing + (Vector3.DOWN * 0.1)
+	
+	#var left_axis := -local_gravity.cross(direction)
+	#var rotation_basis := Basis(left_axis, -local_gravity, direction).orthonormalized()
+	#self.transform.basis = Basis(_model.transform.basis.get_rotation_quaternion().slerp(
+		#rotation_basis, state.step * rotation_speed
+	#))
+	
+	var mspeed = 5.0
+	var oi = self._get_model_oriented_input()
+	_last_strong_direction = oi.normalized()
+	#print(oi * mspeed)
+	#self.apply_central_force(oi * mspeed)
+	
+	# orient to direction
+	#var left_axis := -ppaxis.cross(_last_strong_direction)
+	#var rotation_basis := Basis(left_axis, -ppaxis, _last_strong_direction).orthonormalized()
+	#self.basis = Basis(self.basis.get_rotation_quaternion().slerp(
+		#rotation_basis, state.step * rotation_speed
+	#))
+	
+	#self.transform.rotated(Vector3(10.0,10.0,1.0), TAU/2)
+	if facing != 0:
+		print("facing: ", facing)
+		self.basis = self.basis.rotated(Vector3(1.0,0.0,0.0).normalized(), facing)
+		facing = 0
 	
 	var norm = (p.global_transform.origin - self.global_transform.origin).normalized()
 	#### CHECKOUT: https://kidscancode.org/godot_recipes/3.x/3d/3d_align_surface/
 	self.basis.y = -norm
-	self.basis.x = -self.basis.z.cross(norm)
+	self.basis.x = -self.basis.z.cross(norm) #.rotated(Vector3(10.0,1.0,1.0), TAU/2)
+	
+	#self.basis.y.rotated(oi, TAU / 2)
+	#self.basis = self.basis.orthonormalized()
+	
+	#print(_model.transform)
+	
+	#self.basis.z = facing.cross(-norm)
+	
+	#if Input.is_action_pressed("ui_down"):
+		#var rotation_amount = 0.1
+		#transform.basis = Basis(norm, rotation_amount) * transform.basis
+		
 	#xform.basis.y = new_y
 	#xform.basis.x = -xform.basis.z.cross(new_y)
 	#xform.basis = xform.basis.orthonormalized()

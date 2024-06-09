@@ -35,6 +35,9 @@ func _process(delta: float) -> void:
 				
 	if Input.is_action_pressed("ui_right"):
 		self.apply_central_force(self.basis * Vector3(0.0, 0.0, -10.0))
+		
+	if Input.is_action_pressed("ui_accept"):
+		self.apply_central_force(self.basis * Vector3(0.0, 50.0, 10.0))	
 
 
 	var planet_nodes = get_tree().get_nodes_in_group("planet")

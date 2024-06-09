@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@onready var _model = $Armature
+@onready var _model = $GuyArmature
 
 ## How fast the player moves on the ground.
 @export var move_speed := 80.0

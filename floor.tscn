@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://floor.gd" id="1_7yum2"]
 [ext_resource type="PackedScene" uid="uid://icottslsdxan" path="res://player.tscn" id="1_pggdt"]
 [ext_resource type="PackedScene" uid="uid://81dvw0hx6g5" path="res://Planet.tscn" id="2_urw45"]
-[ext_resource type="PackedScene" uid="uid://c5x17omng40gw" path="res://BP-Collision.tscn" id="3_n5obo"]
+[ext_resource type="PackedScene" uid="uid://cxir485ahrxh" path="res://PlayerGun.tscn" id="4_twswl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5v33m"]
 albedo_color = Color(1, 1, 0.309804, 1)
@@ -37,5 +37,4 @@ material = SubResource("StandardMaterial3D_qvcap")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-4.12702e-08, 0.225615, 0.974217, 1.44033e-08, 0.974217, -0.225615, -1, 4.72079e-09, -4.34557e-08, 36.9429, 7.70807, -1.52)
 
-[node name="P" parent="." instance=ExtResource("3_n5obo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.17225, 0)
+[node name="P" parent="." instance=ExtResource("4_twswl")]

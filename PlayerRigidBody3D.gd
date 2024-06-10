@@ -95,30 +95,8 @@ func _get_model_oriented_input() -> Vector3:
 	return input	
 	
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	# This clause handles if a player falls off a planet, resetting 
-	# their position if they hit the safety net.
-	#if _should_reset:
-		#state.transform.origin = _start_position
-		#_should_reset = false
-
-	var planet_nodes = get_tree().get_nodes_in_group("planet")
-	var p = planet_nodes[0]
-	var ppaxis: Vector3 = (p.global_transform.origin - self.global_transform.origin).normalized()
-	
-	
 	local_gravity = state.total_gravity.normalized()
 	#print("local_gravity", local_gravity)
-	
-	var polarx = 1
-	if ppaxis.x < 0:
-		polarx = -1
-		
-	var polarz = 1
-	if ppaxis.z < 0:
-		polarz = -1		
-		
-	polarz = 1
-	#print(polar)
 	
 	_move_direction = _get_model_oriented_input()
 	
@@ -181,9 +159,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		self.basis = self.basis.rotated(Vector3(1.0,0.0,0.0).normalized(), facing)
 		facing = 0
 	
-	var norm = (p.global_transform.origin - self.global_transform.origin).normalized()
+	#var norm = (p.global_transform.origin - self.global_transform.origin).normalized()
 	#### CHECKOUT: https://kidscancode.org/godot_recipes/3.x/3d/3d_align_surface/
-	self.basis.y = -norm
+	self.basis.y = -local_gravity
 	#self.basis.x = -self.basis.z.cross(norm) #.rotated(Vector3(10.0,1.0,1.0), TAU/2)
 	
 	#self.basis.y.rotated(oi, TAU / 2)

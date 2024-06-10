@@ -46,3 +46,6 @@ script = ExtResource("5_3pboa")
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.624996, 0.345995, -0.699763, -0.433016, 0.899517, 0.0580134, 0.649521, 0.26675, 0.712016, 47.2118, 0, 13.0391)
 shadow_enabled = true
+
+[node name="Planet2" parent="." groups=["planet"] instance=ExtResource("2_urw45")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 15.7817, 21.9225, -40.312)

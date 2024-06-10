@@ -7,7 +7,7 @@ extends RigidBody3D
 ## Strength of the impulse applied upwards for the player's jump.
 @export var jump_initial_impulse := 20.0
 ## How fast the player can turn around to match a new direction.
-@export var rotation_speed := 8.0
+@export var rotation_speed := 2.0
 
 var _move_direction := Vector3.ZERO
 var _last_strong_direction := Vector3.FORWARD
@@ -121,6 +121,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	#print(polar)
 	
 	_move_direction = _get_model_oriented_input()
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		self.apply_central_impulse(-local_gravity * 20.0)
 	
 	if _move_direction.length() > 0.2:
 		_last_strong_direction = _move_direction.normalized()

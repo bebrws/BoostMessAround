@@ -96,12 +96,12 @@ func _get_model_oriented_input() -> Vector3:
 	
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	local_gravity = state.total_gravity.normalized()
-	#print("local_gravity", local_gravity)
+	print("local_gravity", local_gravity)
 	
 	_move_direction = _get_model_oriented_input()
 	
 	if Input.is_action_just_pressed("ui_accept"):
-		self.apply_central_impulse(-local_gravity * 20.0)
+		self.apply_central_impulse(-local_gravity * 40.0)
 	
 	if _move_direction.length() > 0.2:
 		_last_strong_direction = _move_direction.normalized()
@@ -112,7 +112,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		#self.apply_central_force(_move_direction * move_speed)
 		#self.add_constant_central_force(_move_direction * move_speed)
 		if is_on_floor(state):
-			print("moving", _move_direction)
+			#print("moving", _move_direction)
 			#self.add_constant_force(_move_direction)
 			self.apply_central_force(_move_direction * -50.0)
 	

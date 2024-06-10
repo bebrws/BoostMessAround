@@ -5,7 +5,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_vt30q"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gvtm8"]
-radius = 9.378
+radius = 1.5
 
 [node name="StaticBody3D" type="StaticBody3D"]
 
@@ -18,11 +18,11 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("SphereShape3D_vt30q")
 
 [node name="Area3D" type="Area3D" parent="."]
-gravity_space_override = 3
+gravity_space_override = 1
 gravity_point = true
 gravity_point_center = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 gravity_direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-gravity = 14.437
+gravity = 17.122
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)

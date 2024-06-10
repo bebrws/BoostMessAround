@@ -28,16 +28,18 @@ func get_global_position2() -> Vector3:
 	return self.global_position
 	
 func _process(delta: float) -> void:
-	var planet_nodes = get_tree().get_nodes_in_group("planet")
-	var p = planet_nodes[0]
-	var ppaxis: Vector3 = (p.global_transform.origin - self.global_transform.origin).normalized()
-	DebugDraw3D.draw_line(p.global_transform.origin, ppaxis, Color(0, 0, 1))
-
-	#print(p)
-	DebugDraw3D.draw_line(p.global_transform.origin, self.global_transform.origin, Color(1, 1, 0))
+	#var planet_nodes = get_tree().get_nodes_in_group("planet")
+	#var p = planet_nodes[0]
+	#var ppaxis: Vector3 = (p.global_transform.origin - self.global_transform.origin).normalized()
+	#DebugDraw3D.draw_line(p.global_transform.origin, ppaxis, Color(0, 0, 1))
+#
+	##print(p)
+	#DebugDraw3D.draw_line(p.global_transform.origin, self.global_transform.origin, Color(1, 1, 0))
+	#
+	#var c = p.global_transform.origin.cross(self.global_transform.origin)
+	#DebugDraw3D.draw_line(p.global_transform.origin, c, Color(1, 0, 0))
 	
-	var c = p.global_transform.origin.cross(self.global_transform.origin)
-	DebugDraw3D.draw_line(p.global_transform.origin, c, Color(1, 0, 0))
+	DebugDraw3D.draw_line(self.global_transform.origin, (self.global_transform.origin + local_gravity*10.0), Color(1, 1, 0))
 	
 	
 	#var input_left_right := (
@@ -107,15 +109,17 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		_last_strong_direction = _move_direction.normalized()
 		_orient_character_to_direction(_last_strong_direction, state.step)
 	
-	if _move_direction.length() > 0:
-		#print("_move_direction:", _move_direction)
-		#self.apply_central_force(_move_direction * move_speed)
-		#self.add_constant_central_force(_move_direction * move_speed)
-		if is_on_floor(state):
-			#print("moving", _move_direction)
-			#self.add_constant_force(_move_direction)
-			self.apply_central_force(_move_direction * -50.0)
+	#if _move_direction.length() > 0:
+		##print("_move_direction:", _move_direction)
+		##self.apply_central_force(_move_direction * move_speed)
+		##self.add_constant_central_force(_move_direction * move_speed)
+		#if is_on_floor(state):
+			##print("moving", _move_direction)
+			##self.add_constant_force(_move_direction)
+			#self.apply_central_force(_move_direction * -50.0)
 	
+	if is_on_floor(state):
+		self.apply_central_force(_move_direction * -50.0)
 	#if Input.is_action_pressed("ui_up"):
 		#self.apply_central_force(self.transform.basis * Vector3(0.0, 0.0, -1 * polarz * 10.0))
 		##
@@ -185,6 +189,7 @@ func is_on_floor(state: PhysicsDirectBodyState3D) -> bool:
 	for contact in state.get_contact_count():
 		var contact_normal = state.get_contact_local_normal(contact)
 		# If the contact is below us we are on the floor
+		print("contact_normal", contact_normal.dot(-local_gravity))
 		if contact_normal.dot(-local_gravity) > 0.5:
 			return true
 	return false

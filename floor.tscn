@@ -48,4 +48,7 @@ transform = Transform3D(0.624996, 0.345995, -0.699763, -0.433016, 0.899517, 0.05
 shadow_enabled = true
 
 [node name="Planet2" parent="." groups=["planet"] instance=ExtResource("2_urw45")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4.61757, 21.9225, -58.3699)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4.61757, 21.9225, -62.9346)
+
+[node name="Planet3" parent="." groups=["planet"] instance=ExtResource("2_urw45")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 88.4074, 21.9225, -33.2563)

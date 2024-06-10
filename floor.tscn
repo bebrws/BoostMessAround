@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dd4js61x76e61"]
+[gd_scene load_steps=8 format=3 uid="uid://dd4js61x76e61"]
 
 [ext_resource type="Script" path="res://floor.gd" id="1_7yum2"]
 [ext_resource type="PackedScene" uid="uid://icottslsdxan" path="res://player.tscn" id="1_pggdt"]
 [ext_resource type="PackedScene" uid="uid://81dvw0hx6g5" path="res://Planet.tscn" id="2_urw45"]
 [ext_resource type="PackedScene" uid="uid://cxir485ahrxh" path="res://PlayerGun.tscn" id="4_twswl"]
+[ext_resource type="Script" path="res://CameraPosition3D.gd" id="5_3pboa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5v33m"]
 albedo_color = Color(1, 1, 0.309804, 1)
@@ -18,7 +19,7 @@ script = ExtResource("1_7yum2")
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.140521, 21.9225, -0.126157)
 
 [node name="Player" parent="." instance=ExtResource("1_pggdt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118, 3.35783, 4.104)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118, 3.35783, 20.124)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, -26.0779, 0, 0)
@@ -34,11 +35,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.639, -7)
 use_collision = true
 material = SubResource("StandardMaterial3D_qvcap")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.12702e-08, 0.225615, 0.974217, 1.44033e-08, 0.974217, -0.225615, -1, 4.72079e-09, -4.34557e-08, 19.5382, 7.70807, -1.52)
-
-[node name="P" parent="." instance=ExtResource("4_twswl")]
+[node name="P" parent="." groups=["player"] instance=ExtResource("4_twswl")]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 0, 0, 0)
+top_level = true
+
+[node name="CameraPosition3D" type="Node3D" parent="P"]
+transform = Transform3D(1, -1.21652e-31, 0, -1.21652e-31, 1, 0, 0, 0, 1, 2.47483e-15, -2.88901, -9.98455)
+script = ExtResource("5_3pboa")
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.624996, 0.345995, -0.699763, -0.433016, 0.899517, 0.0580134, 0.649521, 0.26675, 0.712016, 47.2118, 0, 13.0391)

@@ -14,6 +14,7 @@ var _last_strong_direction := Vector3.FORWARD
 var local_gravity := Vector3.DOWN
 var _should_reset := false
 
+
 #@onready var _camera_controller = get_node(camera_path)
 @onready var _start_position := global_transform.origin
 
@@ -23,9 +24,10 @@ func _ready() -> void:
 	#_model.max_ground_speed = 4.0
 	pass
 
+func get_global_position2() -> Vector3:
+	return self.global_position
 	
 func _process(delta: float) -> void:
-
 	var planet_nodes = get_tree().get_nodes_in_group("planet")
 	var p = planet_nodes[0]
 	var ppaxis: Vector3 = (p.global_transform.origin - self.global_transform.origin).normalized()
@@ -92,25 +94,33 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		#state.transform.origin = _start_position
 		#_should_reset = false
 
-	local_gravity = state.total_gravity.normalized()
-	
-	
-	if Input.is_action_pressed("ui_up"):
-		self.apply_central_force(self.transform.basis * Vector3(0.0, 0.0, -10.0))
-		#
-	if Input.is_action_pressed("ui_down"):
-		self.apply_central_force(self.transform.basis * Vector3(0.0, 0.0, 10.0))
-#
-	if Input.is_action_pressed("ui_left"):
-		facing = TAU / 32
-		#self.apply_central_force(self.basis * Vector3(0.0, 0.0, 10.0))
-				#
-	if Input.is_action_pressed("ui_right"):
-		facing = -TAU / 32	
-	
 	var planet_nodes = get_tree().get_nodes_in_group("planet")
 	var p = planet_nodes[0]
 	var ppaxis: Vector3 = (p.global_transform.origin - self.global_transform.origin).normalized()
+	
+	
+	local_gravity = state.total_gravity.normalized()
+	#print(ppaxis)
+	
+	var polar = 1
+	if ppaxis.x < 0:
+		polar = -1
+	#print(polar)
+	
+	if Input.is_action_pressed("ui_up"):
+		self.apply_central_force(self.transform.basis * Vector3(0.0, 0.0, 10.0))
+		#
+	if Input.is_action_pressed("ui_down"):
+		self.apply_central_force(self.transform.basis * Vector3(0.0, 0.0, -10.0))
+#
+	if Input.is_action_pressed("ui_left"):
+		facing = polar * TAU / 32
+		#self.apply_central_force(self.basis * Vector3(0.0, 0.0, 10.0))
+				#
+	if Input.is_action_pressed("ui_right"):
+		facing = -1 * polar * TAU / 32	
+	
+
 	#if Input.is_action_pressed("ui_down"):
 		#facing = facing + (Vector3.LEFT * 0.1)
 	#if Input.is_action_pressed("ui_up"):
@@ -137,7 +147,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	
 	#self.transform.rotated(Vector3(10.0,10.0,1.0), TAU/2)
 	if facing != 0:
-		print("facing: ", facing)
+		#print("facing: ", facing)
 		self.basis = self.basis.rotated(Vector3(1.0,0.0,0.0).normalized(), facing)
 		facing = 0
 	

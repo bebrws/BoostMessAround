@@ -18,7 +18,7 @@ script = ExtResource("1_7yum2")
 [node name="Planet" parent="." groups=["planet"] instance=ExtResource("2_urw45")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.140521, 21.9225, -0.126157)
 
-[node name="Player" parent="." instance=ExtResource("1_pggdt")]
+[node name="Stick" parent="." instance=ExtResource("1_pggdt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118, 3.35783, 20.124)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

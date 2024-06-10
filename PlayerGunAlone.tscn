@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://daq5hbi3mls1f"]
+
+[ext_resource type="PackedScene" uid="uid://ces4n4whn3dsq" path="res://player-with-gun.gltf" id="1_fniok"]
+[ext_resource type="Script" path="res://PlayerGunAlone.gd" id="2_w7g67"]
+
+[node name="player-with-gun" instance=ExtResource("1_fniok")]
+script = ExtResource("2_w7g67")

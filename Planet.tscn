@@ -1,13 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://81dvw0hx6g5"]
+[gd_scene load_steps=5 format=3 uid="uid://81dvw0hx6g5"]
+
+[ext_resource type="Script" path="res://PlanetArea3D.gd" id="1_tr0xj"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_hm01p"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_vt30q"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gvtm8"]
-radius = 1.5
+margin = 0.0
+radius = 5.293
 
-[node name="StaticBody3D" type="StaticBody3D"]
+[node name="StaticBody3D" type="StaticBody3D" groups=["Planet"]]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -20,10 +23,12 @@ shape = SubResource("SphereShape3D_vt30q")
 [node name="Area3D" type="Area3D" parent="."]
 gravity_space_override = 1
 gravity_point = true
+gravity_point_unit_distance = 28.79
 gravity_point_center = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
 gravity_direction = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-gravity = 17.122
+gravity = 8.318
+script = ExtResource("1_tr0xj")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" groups=["PlanetCollisionShape"]]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("SphereShape3D_gvtm8")

@@ -9,7 +9,7 @@
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-mass = 0.96
+mass = 1.53
 center_of_mass_mode = 1
 center_of_mass = Vector3(2.08167e-16, -3.2, 2.08167e-16)
 max_contacts_reported = 3
@@ -21,7 +21,10 @@ script = ExtResource("1_lpuit")
 
 [node name="player-with-gun" parent="PlayerNode" instance=ExtResource("2_0c85v")]
 
-[node name="Camera3D" type="Camera3D" parent="PlayerNode"]
+[node name="CameraPivot" type="Node3D" parent="PlayerNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.87198, 0)
+
+[node name="Camera3D" type="Camera3D" parent="PlayerNode/CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.945348, 0.326063, 0, -0.326063, 0.945348, 0, 10.6146, 14.3455)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
